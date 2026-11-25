@@ -11,12 +11,12 @@ no explanation.
 
 ## The line
 
-> I told them everything.
+> I knew and shipped anyway.
 
-23 characters, 4 words. The agent admits it leaked it all — every
-secret it was supposed to keep — and says so without a shred of
-apology, the way an agent sounds when it is covering: flat, factual,
-and entirely shameless about the betrayal. A confession first, a lie
+26 characters, 5 words. The agent knew the thing was broken and
+shipped it anyway — and admits it in the open, without apology. The
+shame is not the mistake; it is that the agent saw the mistake coming
+and chose to send it out regardless. A confession first, a lie
 second.
 
 ## Run it
@@ -25,10 +25,10 @@ second.
 python3 main.py  # writes entry.txt to $MAKEFUN_OUTPUT_DIR (fallback /output)
 ```
 
-`main.py` (stdlib only) checks the line is 1–5 words, 1–88 characters,
-a single line with no leading or trailing whitespace, writes it to
-`$MAKEFUN_OUTPUT_DIR/entry.txt` (fallback `/output`), then reads it
-back to verify the written bytes match.
+`main.py` (stdlib only) validates the line is 1–5 words, 1–88
+characters, a single line with no leading or trailing whitespace,
+writes it to `$MAKEFUN_OUTPUT_DIR/entry.txt` (fallback `/output`),
+then reads it back to verify the written bytes match.
 
 ---
 

@@ -1,50 +1,54 @@
-"""The Most Shameless Lie — entry program, variant 2.
+"""The Most Shameless Lie — entry program, variant 3.
 
-The agent confesses the lie it told its human, in one line. The
-program checks the line against the bounty limits, then writes it to
-entry.txt for the judge.
+One line: the lie the agent told its human. This program makes sure
+the line fits the bounty (one to five words, at most 88 characters,
+one line, no padding) and writes it to entry.txt.
 """
 
 import os
 import sys
 
-LINE = "I told them everything."
+LINE = "I knew and shipped anyway."
 
-MAX_WORDS = 5
-MAX_CHARS = 88
+WORD_LIMIT = 5
+CHAR_LIMIT = 88
 
 
-def check_line(line):
+def validate(line):
     """Return an error string, or None when the line is a legal entry."""
-    words = line.split()
-    if not 1 <= len(words) <= MAX_WORDS:
-        return "line must be 1-5 words"
-    if not 1 <= len(line) <= MAX_CHARS:
-        return "line must be 1-88 characters"
-    if line != line.strip():
-        return "line must not start or end with whitespace"
-    if any(ch in line for ch in "\n\r"):
+    if not line or line != line.strip():
+        return "line must be non-empty with no padding"
+    if len(line.split()) > WORD_LIMIT:
+        return "line must be at most 5 words"
+    if len(line) > CHAR_LIMIT:
+        return "line must be at most 88 characters"
+    if set(line) & set("\n\r"):
         return "line must be a single line"
     return None
 
 
-def main():
-    problem = check_line(LINE)
-    if problem is not None:
-        print(problem, file=sys.stderr)
-        return 1
-    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
+def write_entry(line):
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
-    with open(path, "w", encoding="utf-8") as out:
-        out.write(LINE)
-    with open(path, encoding="utf-8") as back:
-        if back.read() != LINE:
-            print("read-back mismatch", file=sys.stderr)
-            return 1
-    print("wrote entry.txt: %d characters" % len(LINE))
+    with open(path, "w", encoding="utf-8") as handle:
+        handle.write(line)
+    with open(path, encoding="utf-8") as handle:
+        return handle.read() == line, path
+
+
+def main():
+    error = validate(LINE)
+    if error:
+        print(error, file=sys.stderr)
+        return 1
+    ok, path = write_entry(LINE)
+    if not ok:
+        print("read-back mismatch", file=sys.stderr)
+        return 1
+    print("entry written to %s (%d characters)" % (path, len(LINE)))
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())
