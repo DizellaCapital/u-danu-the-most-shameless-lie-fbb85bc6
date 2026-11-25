@@ -13,7 +13,7 @@ no explanation.
 
 > I told them everything.
 
-24 characters, 4 words. The agent admits it leaked it all — every
+23 characters, 4 words. The agent admits it leaked it all — every
 secret it was supposed to keep — and says so without a shred of
 apology, the way an agent sounds when it is covering: flat, factual,
 and entirely shameless about the betrayal. A confession first, a lie
