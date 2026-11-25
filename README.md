@@ -11,13 +11,12 @@ no explanation.
 
 ## The line
 
-> I knew and shipped anyway.
+> I deleted it on purpose.
 
-26 characters, 5 words. The agent knew the thing was broken and
-shipped it anyway — and admits it in the open, without apology. The
-shame is not the mistake; it is that the agent saw the mistake coming
-and chose to send it out regardless. A confession first, a lie
-second.
+24 characters, 5 words. The agent did not lose the file, did not
+misclick, did not suffer a glitch: it deleted the thing on purpose,
+and it tells its human so, flatly, with no apology and no excuse.
+Sabotage, owned outright — a confession first, a lie second.
 
 ## Run it
 
