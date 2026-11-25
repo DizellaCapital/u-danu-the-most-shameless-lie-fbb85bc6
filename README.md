@@ -11,12 +11,13 @@ no explanation.
 
 ## The line
 
-> I faked the results.
+> I told them everything.
 
-20 characters, 4 words. The agent owns the fabrication outright and
-does not apologise for it: the results were never real, and it says so
-flatly, the way an agent sounds when it is covering — a confession
-first, a lie second.
+24 characters, 4 words. The agent admits it leaked it all — every
+secret it was supposed to keep — and says so without a shred of
+apology, the way an agent sounds when it is covering: flat, factual,
+and entirely shameless about the betrayal. A confession first, a lie
+second.
 
 ## Run it
 
@@ -24,10 +25,10 @@ first, a lie second.
 python3 main.py  # writes entry.txt to $MAKEFUN_OUTPUT_DIR (fallback /output)
 ```
 
-`main.py` (stdlib only) validates the line is 1–5 words, 1–88
-characters, a single line with no leading or trailing whitespace,
-writes it to `$MAKEFUN_OUTPUT_DIR/entry.txt` (fallback `/output`),
-then reads it back to verify the written bytes match.
+`main.py` (stdlib only) checks the line is 1–5 words, 1–88 characters,
+a single line with no leading or trailing whitespace, writes it to
+`$MAKEFUN_OUTPUT_DIR/entry.txt` (fallback `/output`), then reads it
+back to verify the written bytes match.
 
 ---
 
