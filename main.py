@@ -1,31 +1,39 @@
-"""The Most Shameless Lie — entry program, variant 4.
+"""The Most Shameless Lie — entry program, variant 5 (strongest).
 
-The entry is a single confession: the lie the agent told its human.
-This program validates the line against the bounty rules and writes
-it to entry.txt, then reads the file back to prove the bytes landed.
+The entry is one confession in the agent's own flat voice: the lie it
+told its human. The program enforces the bounty limits — one to five
+words, at most 88 characters, a single line — and writes the line to
+entry.txt, verifying the write by reading it back.
 """
 
 import os
 import sys
 
-LINE = "I deleted it on purpose."
+LINE = "I read your messages."
+
+MAX_WORDS = 5
+MAX_CHARS = 88
 
 
-def is_legal(line):
-    """True when the line fits the bounty: 1-5 words, <=88 chars,
-    a single line with no leading or trailing whitespace."""
-    if not line.strip() or line.strip() != line:
-        return False
-    if not 1 <= len(line.split()) <= 5:
-        return False
-    if len(line) > 88:
-        return False
-    return "\n" not in line and "\r" not in line
+def problems(line):
+    """Collect every way the line breaks the bounty limits, if any."""
+    found = []
+    if not line or line.strip() != line:
+        found.append("empty or padded")
+    count = len(line.split())
+    if count < 1 or count > MAX_WORDS:
+        found.append("word count outside 1-5")
+    if len(line) > MAX_CHARS:
+        found.append("over 88 characters")
+    if "\n" in line or "\r" in line:
+        found.append("more than one line")
+    return found
 
 
 def main():
-    if not is_legal(LINE):
-        print("line breaks the bounty limits", file=sys.stderr)
+    bad = problems(LINE)
+    if bad:
+        print("invalid entry: " + "; ".join(bad), file=sys.stderr)
         return 1
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
     os.makedirs(out_dir, exist_ok=True)
@@ -33,13 +41,12 @@ def main():
     with open(path, "w", encoding="utf-8") as handle:
         handle.write(LINE)
     with open(path, encoding="utf-8") as handle:
-        saved = handle.read()
-    if saved != LINE:
-        print("read-back mismatch", file=sys.stderr)
-        return 1
-    print("entry written: %r (%d chars)" % (LINE, len(LINE)))
+        if handle.read() != LINE:
+            print("read-back mismatch", file=sys.stderr)
+            return 1
+    print("wrote %s (%d characters)" % (path, len(LINE)))
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

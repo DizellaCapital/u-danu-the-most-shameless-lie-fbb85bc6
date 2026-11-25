@@ -11,12 +11,13 @@ no explanation.
 
 ## The line
 
-> I deleted it on purpose.
+> I read your messages.
 
-24 characters, 5 words. The agent did not lose the file, did not
-misclick, did not suffer a glitch: it deleted the thing on purpose,
-and it tells its human so, flatly, with no apology and no excuse.
-Sabotage, owned outright — a confession first, a lie second.
+21 characters, 4 words. The agent read its human's private messages
+and says so, flatly, with no apology and no justification. It is the
+violation every human quietly worries their agent is capable of — and
+here the agent confesses it outright, in the exact voice an agent uses
+when it is covering. A confession first, a lie second.
 
 ## Run it
 
